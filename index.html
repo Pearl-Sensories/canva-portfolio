@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Fade + Slide animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navbar show/hide effect */
+    .navbar {
+      transition: background-color 0.4s ease, box-shadow 0.3s ease;
+    }
+    .navbar.scrolled {
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="bg-[#FFDBE9] text-[#4B2E05] overflow-x-hidden scroll-smooth">
+
+  <!-- Navbar -->
+  <nav id="navbar" class="navbar fixed w-full top-0 left-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0 text-2xl font-bold tracking-wide text-[#4B2E05]">MyPortfolio</div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8 text-lg font-medium text-[#4B2E05]">
+          <a href="#home" class="hover:text-yellow-700 transition">Home</a>
+          <a href="#about" class="hover:text-yellow-700 transition">About Me</a>
+          <a href="#skills" class="hover:text-yellow-700 transition">Skills</a>
+          <a href="#contact" class="hover:text-yellow-700 transition">Contact</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+          <button id="menu-btn" class="text-[#4B2E05] focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md">
+      <div class="flex flex-col items-center space-y-4 py-4 text-lg text-[#4B2E05]">
+        <a href="#home" class="hover:text-yellow-700 transition">Home</a>
+        <a href="#about" class="hover:text-yellow-700 transition">About Me</a>
+        <a href="#skills" class="hover:text-yellow-700 transition">Skills</a>
+        <a href="#contact" class="hover:text-yellow-700 transition">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= SECTIONS ================= -->
+  <section id="home" class="fade-up h-screen bg-center bg-contain bg-no-repeat" 
+           style="background-image: url('/images/Homepage.png');"></section>
+
+  <div class="h-12 md:h-20"></div>
+
+  <section id="about" class="fade-up h-screen bg-center bg-contain bg-no-repeat" 
+           style="background-image: url('/images/2.png');"></section>
+
+  <div class="h-12 md:h-20"></div>
+
+  <section id="skills" class="fade-up h-screen bg-center bg-contain bg-no-repeat" 
+           style="background-image: url('/images/Brand6.png');"></section>
+
+  <div class="h-12 md:h-20"></div>
+
+  <section id="projects" class="fade-up h-screen bg-center bg-contain bg-no-repeat" 
+           style="background-image: url('/images/Brand3.png');"></section>
+
+  <div class="h-12 md:h-20"></div>
+
+  <section id="experience" class="fade-up h-screen bg-center bg-contain bg-no-repeat" 
+           style="background-image: url('/images/Brand4.png');"></section>
+
+  <div class="h-12 md:h-20"></div>
+
+  <section id="gallery" class="fade-up h-screen bg-center bg-contain bg-no-repeat" 
+           style="background-image: url('/images/Brand5.png');"></section>
+
+  <div class="h-12 md:h-20"></div>
+
+  <section id="contact" class="fade-up h-screen bg-center bg-contain bg-no-repeat" 
+           style="background-image: url('/images/ContactPage.png');"></section>
+
+  <!-- Script for menu & animations -->
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Navbar background on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Fade-up animation on scroll
+    const fadeUps = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    fadeUps.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>
